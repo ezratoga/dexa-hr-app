@@ -43,7 +43,7 @@ export default function EmployeeList() {
               <td>{emp.email}</td>
               <td>{emp.phone}</td>
               <td>
-                <button onClick={() => navigate(`/dashboard/employees/edit/${emp.id}`)}>Edit</button>
+                <button onClick={() => navigate(`/dashboard/employees/edit/${emp.employee_id}`)}>Edit</button>
               </td>
             </tr>
           ))}

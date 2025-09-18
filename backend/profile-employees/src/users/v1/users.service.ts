@@ -8,6 +8,7 @@ import { EmployeeProfile } from 'src/profiles/v1/profiles.entity';
 import { LoginUserDTO } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserAdminDto } from './dto/update-user-admin-dto';
 
 @Injectable()
 export class UserService {
@@ -183,10 +184,10 @@ export class UserService {
         throw new UnauthorizedException('Unauthorized')
     }
 
-    async updateUserAdmin(updateUser: UpdateUserDto, user: any) {
+    async updateUserAdmin(updateUser: UpdateUserAdminDto, id: string) {
         try {
-            let { employee_id, user_id, email } = user;
-            let { password, phone, photo } = updateUser;
+            const employee_id = parseInt(id);
+            let { password, phone, photo, email, name, position } = updateUser;
 
             let updatedFieldUser: any = {
                 updatedat: new Date()
@@ -207,21 +208,33 @@ export class UserService {
                 const hashedPassword = await bcrypt.hash(password, 10);
                 updatedFieldUser.password = hashedPassword;
             }
+
+            if (position) {
+                updatedFieldProfile.position = position;
+            }
+
+            if (email) {
+                updatedFieldUser.email = email;
+            }
+
+            if (name) {
+                updatedFieldProfile.name = name;
+            }
             
             await Promise.all([
                 this.userRepository.update(
-                    { user_id, employee_id },
+                    { employee_id },
                     updatedFieldUser
                 ),
                 this.profileRepository.update(
-                    { employee_id, user_id },
+                    { employee_id },
                     updatedFieldProfile
                 )
             ]);
             
             const [updateUserDB, updateProfileDB] = await Promise.all([
-                this.userRepository.findOne({ where: { employee_id, user_id } }),
-                this.profileRepository.findOne({ where: { employee_id, user_id } })
+                this.userRepository.findOne({ where: { employee_id } }),
+                this.profileRepository.findOne({ where: { employee_id } })
             ])
 
             let response = {

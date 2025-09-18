@@ -2,6 +2,7 @@ import { NavLink, Routes, Route } from "react-router-dom";
 import EmployeeList from "./EmployeeList";
 import EmployeeForm from "../components/EmployeeForm";
 import AbsenceList from "../components/AbsenceList";
+import '../style/Dashboard.css';
 
 export default function Dashboard() {
   return (

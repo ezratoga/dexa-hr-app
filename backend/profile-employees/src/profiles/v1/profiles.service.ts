@@ -42,4 +42,23 @@ export class ProfileService {
             }
         }
     }
+
+    async getProfileById(id: string): Promise<any> {
+        const employee_id = parseInt(id);
+        const profile = await this.employeeProfileRepo.findOne({
+            where: { employee_id },
+            relations: ['user'],
+        });
+        
+        let responseDetail = {
+            employee_id: profile?.employee_id,
+            name: profile?.name,
+            position: profile?.position,
+            photo: profile?.photo,
+            email: profile?.user?.email,
+            phone: profile?.user?.phone
+        }
+
+        return responseDetail
+    }
 }

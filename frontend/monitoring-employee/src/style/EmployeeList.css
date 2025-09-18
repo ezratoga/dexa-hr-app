@@ -1,56 +1,178 @@
-.employee-list-page {
-  padding: 1rem;
+/** Enhanced responsiveness and beauty for EmployeeList **/
+
+/* Add subtle hover and focus effects for table rows and buttons */
+.employee-list-table tr:hover {
+  background: #f1f5ff;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.10);
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
-.employee-list-page h2 {
-  margin-bottom: 1rem;
-}
-
-.employee-list-page button {
-  background: #2563eb;
+.employee-list-action-btn,
+.employee-list-delete-btn {
+  background: linear-gradient(90deg, #6366f1 0%, #2563eb 100%);
   color: #fff;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.7rem 1.1rem;
   border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  transition: background 0.2s, transform 0.1s;
 }
 
-.employee-list-page button:hover {
-  background: #1d4ed8;
+.employee-list-action-btn:hover,
+.employee-list-delete-btn:hover,
+.employee-list-action-btn:focus,
+.employee-list-delete-btn:focus {
+  background: linear-gradient(90deg, #818cf8 0%, #2563eb 100%);
+  transform: translateY(-2px) scale(1.04);
+  outline: none;
 }
 
-table {
+.employee-list-delete-btn {
+  background: linear-gradient(90deg, #f87171 0%, #ef4444 100%);
+}
+
+.employee-list-delete-btn:hover,
+.employee-list-delete-btn:focus {
+  background: linear-gradient(90deg, #fca5a5 0%, #ef4444 100%);
+}
+
+/* Table styling for desktop */
+.employee-list-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.07);
+  margin-bottom: 2rem;
 }
 
-th, td {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
+.employee-list-table th, .employee-list-table td {
+  padding: 1.1rem 1.2rem;
+  border-bottom: 1px solid #e5e7eb;
   text-align: left;
+  font-size: 1.08rem;
 }
 
-th {
-  background: #f3f4f6;
+.employee-list-table th {
+  background: linear-gradient(90deg, #e0e7ff 0%, #f3f4f6 100%);
+  color: #3730a3;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-bottom: 2px solid #6366f1;
 }
 
-tr:nth-child(even) {
-  background: #f9fafb;
+.employee-list-table tr:last-child td {
+  border-bottom: none;
 }
 
-@media (max-width: 600px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
+/* Add subtle fade-in animation */
+@keyframes employeeListFadeIn {
+  from { opacity: 0; transform: translateY(30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.employee-list-table, .employee-list-container {
+  animation: employeeListFadeIn 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Responsive design for tablets */
+@media (max-width: 900px) {
+  .employee-list-container {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    max-width: 98vw;
+    border-radius: 12px;
   }
-  th {
+  .employee-list-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .employee-list-table th, .employee-list-table td {
+    padding: 0.8rem 0.7rem;
+    font-size: 0.98rem;
+  }
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 600px) {
+  .employee-list-container {
+    padding: 0.7rem 0.1rem 0.7rem 0.1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.06);
+  }
+  .employee-list-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.8rem;
+  }
+  .employee-list-table, .employee-list-table thead, .employee-list-table tbody, .employee-list-table th, .employee-list-table td, .employee-list-table tr {
+    display: block;
+    width: 100%;
+  }
+  .employee-list-table thead {
     display: none;
   }
-  td {
+  .employee-list-table tr {
+    margin-bottom: 1.2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(99, 102, 241, 0.06);
+    padding: 0.5rem 0.2rem;
+  }
+  .employee-list-table td {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem;
+    align-items: center;
+    padding: 0.7rem 0.5rem;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.98rem;
+    position: relative;
+    background: transparent;
   }
+  .employee-list-table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #6366f1;
+    flex-basis: 45%;
+    text-align: left;
+    padding-right: 0.5rem;
+  }
+  .employee-list-action-btn, .employee-list-delete-btn {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
+    margin-bottom: 0.3rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* Subtle shadow for the page background on all screens */
+.employee-list-page {
+  box-shadow: 0 2px 16px rgba(99, 102, 241, 0.04);
+}
+
+/* Add a nice gradient border to the container for extra beauty */
+.employee-list-container {
+  border: 2px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(white, white), linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%);
+}
+
+/* Hide scrollbars for a cleaner look on webkit browsers */
+.employee-list-container::-webkit-scrollbar,
+.employee-list-table::-webkit-scrollbar {
+  width: 0.4em;
+  background: transparent;
+}
+.employee-list-container::-webkit-scrollbar-thumb,
+.employee-list-table::-webkit-scrollbar-thumb {
+  background: #e0e7ff;
+  border-radius: 8px;
 }

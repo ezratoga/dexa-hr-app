@@ -1,4 +1,4 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Req, Param } from '@nestjs/common';
 import { ProfileService } from './profiles.service';
 import { EmployeeProfile } from './profiles.entity';
 
@@ -16,5 +16,10 @@ export class ProfileController {
   async GetProfile(@Req() req) {
     const { user } = req;
     return await this.profileService.getDetailProfile(user);       
+  }
+
+  @Get(':id')
+  async getProfileById(@Param('id') id: string): Promise<any> {
+    return await this.profileService.getProfileById(id);
   }
 }
