@@ -41,9 +41,10 @@ export default function EmployeeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
+    const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
     const url = id 
-      ? `${apiUrl}/employees/${id}` 
-      : `${apiUrl}/users/v1/register`;
+      ? `${apiUrl}/users/v1/update-user-admin/${id}` 
+      : `${apiUrl}/users/v1/signup`;
     const method = id ? "PUT" : "POST";
 
     const res = await fetch(url, {

@@ -186,7 +186,8 @@ export class UserService {
 
     async updateUserAdmin(updateUser: UpdateUserAdminDto, id: string) {
         try {
-            const employee_id = parseInt(id);
+            console.log(id);
+            const employee_id = Number(id);
             let { password, phone, photo, email, name, position } = updateUser;
 
             let updatedFieldUser: any = {
@@ -249,7 +250,7 @@ export class UserService {
 
         } catch (error) {
             console.error(error);
-            return { message: 'Ada kesalahan terjadi' };
+            throw new Error('Ada kesalahan terjadi');
         }
     }
 
