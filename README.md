@@ -110,6 +110,7 @@ npm install
 ```
 VITE_API_EMPLOYEE_BASE_URL=<base-url-profile-employee-service>
 VITE_API_ATTENDANCE_BASE_URL=<base-url-attendance-service>
+VITE_API_MONITORING_BASE_URL=<base-url-monitoring-hr-service>
 ```
 
 4. Start the frontend development server:
