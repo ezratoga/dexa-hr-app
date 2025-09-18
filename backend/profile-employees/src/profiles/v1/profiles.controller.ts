@@ -7,8 +7,9 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Get('findAll')
-  getHello(): Promise<EmployeeProfile[]> {
-    return this.profileService.findAll();
+  async getHello(@Req() req): Promise<EmployeeProfile[]> {
+    const { user } = req;
+    return await this.profileService.findAll(user);
   }
   
   @Get('get-profile')

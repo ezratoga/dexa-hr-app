@@ -1,69 +1,54 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../style/EmployeeList.css";
 
-export default function EmployeeForm() {
+export default function EmployeeList() {
+  const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
-  const { id } = useParams();
-  const [employee, setEmployee] = useState({
-    name: "",
-    email: "",
-    position: "",
-    phone: "",
-  });
 
   useEffect(() => {
-    if (id) {
-      // fetch existing employee
-      const fetchEmployee = async () => {
-        const token = localStorage.getItem("token");
-        const res = await fetch(`http://localhost:3000/employees/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        const data = await res.json();
-        setEmployee(data);
-      };
-      fetchEmployee();
-    }
-  }, [id]);
-
-  const handleChange = (e) => setEmployee({ ...employee, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    const url = id 
-      ? `http://localhost:3000/employees/${id}` 
-      : "http://localhost:3000/employees";
-    const method = id ? "PUT" : "POST";
-
-    const res = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      body: JSON.stringify(employee),
-    });
-
-    if (res.ok) navigate("/dashboard/employees");
-  };
+    const fetchEmployees = async () => {
+      const token = localStorage.getItem("token");
+      const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
+      const res = await fetch(`${apiUrl}/users/v1/all-users`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      setEmployees(data);
+    };
+    fetchEmployees();
+  }, []);
 
   return (
-    <div className="employee-form-page">
-      <h2>{id ? "Update Karyawan" : "Tambah Karyawan"}</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Nama</label>
-        <input name="name" value={employee.name} onChange={handleChange} required />
-
-        <label>Email</label>
-        <input name="email" value={employee.email} onChange={handleChange} type="email" required />
-
-        <label>Posisi</label>
-        <input name="position" value={employee.position} onChange={handleChange} required />
-
-        <label>No HP</label>
-        <input name="phone" value={employee.phone} onChange={handleChange} type="tel" />
-
-        <button type="submit">{id ? "Update" : "Tambah"}</button>
-      </form>
+    <div className="employee-list-page">
+      <h2>Data Karyawan</h2>
+      <button onClick={() => navigate("/dashboard/employees/add")}>Tambah Karyawan</button>
+      <table>
+        <thead>
+          <tr>
+            <th>ID Pegawai</th>
+            <th>Nama</th>
+            <th>Posisi</th>
+            <th>Email</th>
+            <th>No HP</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employees.map(emp => (
+            <tr key={emp.employee_id}>
+              <td>{emp.employee_id}</td>
+              <td>{emp.profile.name}</td>
+              <td>{emp.profile.position}</td>
+              <td>{emp.email}</td>
+              <td>{emp.phone}</td>
+              <td>
+                <button onClick={() => navigate(`/dashboard/employees/edit/${emp.id}`)}>Edit</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

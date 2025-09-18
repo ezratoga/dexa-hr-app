@@ -28,7 +28,7 @@ export default function AdminLogin() {
       }
 
       const data = await res.json();
-      localStorage.setItem("adminToken", data?.token);
+      localStorage.setItem("token", data?.token);
 
       navigate("/dashboard"); // Redirect to admin dashboard
     } catch (err) {

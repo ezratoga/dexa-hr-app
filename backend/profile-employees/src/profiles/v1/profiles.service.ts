@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmployeeProfile } from './profiles.entity';
 import { Repository } from 'typeorm';
@@ -10,8 +10,14 @@ export class ProfileService {
         private readonly employeeProfileRepo: Repository<EmployeeProfile>
     ) {}
     
-    async findAll(): Promise<EmployeeProfile[]> {
-        return await this.employeeProfileRepo.find();
+    async findAll(user: any): Promise<EmployeeProfile[]> {
+        const { position } = user
+        
+        if (position === 'admin') {
+            return await this.employeeProfileRepo.find();
+        }
+
+        throw new UnauthorizedException('Unauthorized')
     }
 
     async getDetailProfile(req: any) {
