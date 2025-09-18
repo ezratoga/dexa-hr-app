@@ -95,6 +95,12 @@ The backend API will be running on http://localhost:5000. Please make different 
 cd frontend
 ```
 
+You can directly go to each frontend service (`employee-absence`, `monitoring-employee`)
+1. Open a new terminal and navigate to the frontend directory:
+```bash
+cd frontend/<name-frontend-service>
+```
+
 2. Install dependencies:
 ```bash
 npm install
@@ -105,7 +111,7 @@ npm install
 npm start
 ```
 
-The frontend application will be running on http://localhost:3000
+The frontend application will be running on http://localhost:5173 for `employee-absence` and http://localhost:5174 for `monitoring-employee`
 
 ## API Usage
 
