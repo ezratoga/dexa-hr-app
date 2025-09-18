@@ -169,6 +169,9 @@ curl -X GET http://localhost:5000/profiles/v1/get-profile \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
+## Migrate SQL Table
+You can run *.sql script in folder /migration-db
+
 ## Default Credentials
 
 If there are default users set up in the database, they might be:
