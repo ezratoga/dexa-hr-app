@@ -7,7 +7,8 @@ export default function AbsenceList() {
   useEffect(() => {
     const fetchAbsences = async () => {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:3000/absences", {
+      const apiUrl = import.meta.env.VITE_API_MONITORING_BASE_URL
+      const res = await fetch(`${apiUrl}/monitoring/v1/absence-summary-all`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -28,18 +29,22 @@ export default function AbsenceList() {
         <thead>
           <tr>
             <th>Nama</th>
+            <th>Posisi</th>
             <th>Tanggal & Waktu Masuk</th>
+            <th>Status Masuk</th>
             <th>Tanggal & Waktu Pulang</th>
-            <th>Tipe Kerja</th>
+            <th>Status Pulang</th>
           </tr>
         </thead>
         <tbody>
           {absences.map(a => (
-            <tr key={a.id}>
+            <tr key={a.employee_id}>
               <td>{a.name}</td>
-              <td>{formatDate(a.checkIn)}</td>
-              <td>{formatDate(a.checkOut)}</td>
-              <td>{a.workType}</td>
+              <td>{a.position}</td>
+              <td>{a?.absence_in ? formatDate(a.absence_in) : '-'}</td>
+              <td>{a.work_type_in}</td>
+              <td>{a?.absence_out ? formatDate(a.absence_out) : '-'}</td>
+              <td>{a.work_type_out}</td>
             </tr>
           ))}
         </tbody>
