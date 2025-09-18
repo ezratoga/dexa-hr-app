@@ -15,7 +15,8 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/users/v1/login-admin", {
+      const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
+      const res = await fetch(`${apiUrl}/users/v1/login-admin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
