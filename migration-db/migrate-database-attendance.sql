@@ -1,4 +1,4 @@
-CREATE SCHEMA employee_attendance AUTHORIZATION postgres;
+CREATE SCHEMA employee_attendance AUTHORIZATION postgres; -- replace postgres with your own database user
 
 -- employee_attendance.absence_in_out definition
 

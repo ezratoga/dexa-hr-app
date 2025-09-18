@@ -1,4 +1,4 @@
-CREATE SCHEMA employee AUTHORIZATION postgres;
+CREATE SCHEMA employee AUTHORIZATION postgres; -- replace postgres with your own database user
 
 -- employee.employee_profile definition
 
