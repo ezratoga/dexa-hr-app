@@ -1,0 +1,149 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+.admin-login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.admin-login-container {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.admin-login-container h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+
+input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  border-color: #1e40af;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+  outline: none;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #1e40af;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-login:hover:not(:disabled) {
+  background-color: #1e3a8a;
+  transform: translateY(-2px);
+}
+
+.btn-login:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.error-message {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  color: #dc2626;
+  text-align: center;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .admin-login-container {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .btn-login {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+
+  input {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.95rem;
+  }
+}

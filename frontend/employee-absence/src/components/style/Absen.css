@@ -1,0 +1,40 @@
+.absen-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.absen-options button {
+  flex: 1;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #f1f5f9;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.absen-options button.active {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.absen-action {
+  text-align: center;
+}
+
+.submit-btn {
+  padding: 0.8rem 1.5rem;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #15803d;
+}

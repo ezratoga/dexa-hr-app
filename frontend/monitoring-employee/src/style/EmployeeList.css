@@ -1,0 +1,56 @@
+.employee-list-page {
+  padding: 1rem;
+}
+
+.employee-list-page h2 {
+  margin-bottom: 1rem;
+}
+
+.employee-list-page button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.employee-list-page button:hover {
+  background: #1d4ed8;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #f3f4f6;
+}
+
+tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  th {
+    display: none;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+}
