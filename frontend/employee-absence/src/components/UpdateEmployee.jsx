@@ -23,8 +23,9 @@ export default function UpdateEmployee() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
+      const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
 
-      const res = await fetch("http://localhost:3000/users/v1/update-user", {
+      const res = await fetch(`${apiUrl}/users/v1/update-user`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

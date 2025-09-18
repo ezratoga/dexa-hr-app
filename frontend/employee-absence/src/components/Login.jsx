@@ -13,7 +13,8 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const logining = await fetch('http://localhost:3000/users/v1/login', {
+      const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
+      const logining = await fetch(`${apiUrl}/users/v1/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -23,6 +24,7 @@ export default function Login() {
 
       if (!logining?.ok) {
         alert('Periksa email dan password');
+        return;
       }
 
       const data = await logining.json();

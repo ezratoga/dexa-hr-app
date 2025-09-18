@@ -55,38 +55,42 @@ export class UserService {
     }
 
     async loginUser(login: LoginUserDTO) {
+        const { email, password } = login;
+
+        const findUserData = await this.userRepository.findOne({
+            where: { email },
+        });
+        const hashedPassword = findUserData?.password;
+
         try {
-            const { email, password } = login;
-
-            const findUserData = await this.userRepository.findOne({
-                where: { email },
-            });
-            const hashedPassword = findUserData?.password;
-
             const comparingPassword = await bcrypt.compare(password, hashedPassword!);
             if (comparingPassword) {
-                const getProfile = await this.profileRepository.findOne({where: { employee_id: findUserData?.employee_id } })
-                if (getProfile) {
-                    let fullEmployeeProfile = {
-                        name: getProfile.name,
-                        position: getProfile.position,
-                        ...findUserData,
-                    }
-                    console.log(fullEmployeeProfile);
+                try {
+                    const getProfile = await this.profileRepository.findOne({where: { employee_id: findUserData?.employee_id } })
+                    if (getProfile) {
+                        let fullEmployeeProfile = {
+                            name: getProfile.name,
+                            position: getProfile.position,
+                            ...findUserData,
+                        }
 
-                    const tokenGeneration = this.jwtService.sign(fullEmployeeProfile);
+                        const tokenGeneration = this.jwtService.sign(fullEmployeeProfile);
 
-                    return {
-                        token: tokenGeneration
+                        return {
+                            token: tokenGeneration
+                        }
                     }
+                } catch (error) {
+                    console.error(error);
+                    throw new Error('Terjadi kesalahan saat validasi user')
                 }
             }
-
-            return { message: 'Unauthorized' }
-            
         } catch (error) {
-            return { message: 'Ada kesalahan terjadi' }
+            console.error(error)
+            throw new Error('Terjadi kesalahan saat validasi password')
         }
+
+        throw new UnauthorizedException('Unauthorized')
     }
 
     async updateUser(updateUser: UpdateUserDto, user: any) {

@@ -16,8 +16,9 @@ export default function Absen() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
+      const apiUrl = import.meta.env.VITE_API_ATTENDANCE_BASE_URL;
 
-      const response = await fetch("http://localhost:3001/attendance/v1/absence-employee", {
+      const response = await fetch(`${apiUrl}/attendance/v1/absence-employee`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

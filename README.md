@@ -106,7 +106,13 @@ cd frontend/<name-frontend-service>
 npm install
 ```
 
-3. Start the frontend development server:
+3, Set env variable in .env file in each frontend service
+```
+VITE_API_EMPLOYEE_BASE_URL=<base-url-profile-employee-service>
+VITE_API_ATTENDANCE_BASE_URL=<base-url-attendance-service>
+```
+
+4. Start the frontend development server:
 ```bash
 npm start
 ```

@@ -11,8 +11,9 @@ export default function Summary() {
     const fetchSummary = async () => {
       try {
         const token = localStorage.getItem("token");
+        const apiUrl = import.meta.env.VITE_API_ATTENDANCE_BASE_URL;
 
-        const response = await fetch("http://localhost:3001/attendance/v1/absence-summary", {
+        const response = await fetch(`${apiUrl}/attendance/v1/absence-summary`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

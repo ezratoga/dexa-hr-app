@@ -14,7 +14,8 @@ export default function Profile() {
     const fetchProfile = async() =>  {
       try {
         const token = localStorage.getItem('token');
-        const getProfile = await fetch('http://localhost:3000/profiles/v1/get-profile', {
+        const apiUrl = import.meta.env.VITE_API_EMPLOYEE_BASE_URL;
+        const getProfile = await fetch(`${apiUrl}/profiles/v1/get-profile`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
