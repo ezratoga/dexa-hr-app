@@ -36,6 +36,9 @@ Before running this application, make sure you have the following installed:
 - PostgreSQL (v12 or higher)
 - Git
 
+## Migrate SQL Table
+Before you run the backend service, you must have postgre database. Then, you can run provided *.sql scripts in folder /migration-db inside your PostgreSQL database
+
 ## Installation
 
 1. Clone the repository:
@@ -167,9 +170,6 @@ curl -X POST http://localhost:5000/users/v1/login \
 curl -X GET http://localhost:5000/profiles/v1/get-profile \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
-
-## Migrate SQL Table
-You can run *.sql script in folder /migration-db
 
 ## Default Credentials
 
