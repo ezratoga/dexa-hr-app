@@ -19,6 +19,11 @@ export class UsersController {
     return await this.userService.loginUser(loginUser);
   }
 
+  @Post('login-admin')
+  async loginUserAdmin(@Body() loginUser: LoginUserDTO): Promise<any> {
+    return await this.userService.loginUserAdmin(loginUser);
+  }
+
   @Put('update-user')
   async updateUser(@Body() updateUser: UpdateUserDto, @Req() req: any): Promise<any> {
     const { user } = req;

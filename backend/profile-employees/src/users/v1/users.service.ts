@@ -150,15 +150,15 @@ export class UserService {
         }
     }
 
-        async loginUserAdmin(login: LoginUserDTO) {
+    async loginUserAdmin(login: LoginUserDTO) {
+        const { email, password } = login;
+        
+        const findUserData = await this.userRepository.findOne({
+            where: { email },
+        });
+        const hashedPassword = findUserData?.password;
+
         try {
-            const { email, password } = login;
-
-            const findUserData = await this.userRepository.findOne({
-                where: { email },
-            });
-            const hashedPassword = findUserData?.password;
-
             const comparingPassword = await bcrypt.compare(password, hashedPassword!);
             if (comparingPassword) {
                 const getProfile = await this.profileRepository.findOne({where: { employee_id: findUserData?.employee_id } })
@@ -168,7 +168,6 @@ export class UserService {
                         position: getProfile.position,
                         ...findUserData,
                     }
-                    console.log(fullEmployeeProfile);
 
                     const tokenGeneration = this.jwtService.sign(fullEmployeeProfile);
 
@@ -176,13 +175,12 @@ export class UserService {
                         token: tokenGeneration
                     }
                 }
-            }
-
-            throw new UnauthorizedException('Unauthorized')
-            
+            }               
         } catch (error) {
-            throw new Error('Ada kesalahan terjadi')
+            throw new Error('Ada kesalahan saat validasi password')
         }
+
+        throw new UnauthorizedException('Unauthorized')
     }
 
     async updateUserAdmin(updateUser: UpdateUserDto, user: any) {
