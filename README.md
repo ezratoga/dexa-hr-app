@@ -19,7 +19,6 @@ Dexa HR App is a comprehensive HR management solution that helps organizations m
 ### Frontend
 - React.js
 - React Router for navigation
-- Axios for API calls
 - Modern CSS styling
 
 ### Backend
