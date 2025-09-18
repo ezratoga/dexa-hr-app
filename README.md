@@ -68,7 +68,7 @@ cd <directory_name_for_each_service>
 npm install
 ```
 
-3. Set up environment variables. Create a `.env` file in the backend for each backend service directory:
+3. Set up environment variables. Create a `.env` file in each backend service directory (`attendance-employee`, `monitoring-hr`, `profile-employees`):
 ```bash
 PORT=5000
 DB_HOST=localhost
