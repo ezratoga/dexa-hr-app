@@ -31,7 +31,7 @@ Dexa HR App is a comprehensive HR management solution that helps organizations m
 
 Before running this application, make sure you have the following installed:
 
-- Node.js (v14 or higher)
+- Node.js (v23 or higher)
 - npm or yarn
 - PostgreSQL (v12 or higher)
 - Git
