@@ -96,7 +96,6 @@ cd frontend
 ```
 
 You can directly go to each frontend service (`employee-absence`, `monitoring-employee`)
-1. Open a new terminal and navigate to the frontend directory:
 ```bash
 cd frontend/<name-frontend-service>
 ```
