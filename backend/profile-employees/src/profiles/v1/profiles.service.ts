@@ -22,16 +22,17 @@ export class ProfileService {
 
     async getDetailProfile(req: any) {
         try {
-            const { user_id, employee_id, email, phone } = req
+            const { user_id, employee_id } = req
             const getDetailProfile = await this.employeeProfileRepo.findOne({
-                where: { user_id, employee_id }
+                where: { user_id, employee_id },
+                relations: ['user']
             });
 
             if (getDetailProfile) {
                 return {
                     ...getDetailProfile,
-                    email,
-                    phone
+                    email: getDetailProfile?.user?.email,
+                    phone: getDetailProfile?.user?.phone
                 }
             }
 

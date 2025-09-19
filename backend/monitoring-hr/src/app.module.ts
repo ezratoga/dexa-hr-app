@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import database from './config/database';
 import { SummaryModule } from './summary-all/summary.module';
 import { JwtModule } from '@nestjs/jwt';
+import { KafkaModule } from './kafka/kafka.module';
+import { AuditChangeLog } from './monitoring/monitoring.entity';
+import { MonitoringModule } from './monitoring/monitoring.module';
 
 @Module({
   imports: [
@@ -23,8 +26,8 @@ import { JwtModule } from '@nestjs/jwt';
         username: configService.get<string>('database.username'),
         password: configService.get<string>('database.password'),
         database: configService.get<string>('database.database'),
-        schema: configService.get<string>('database.schema') || 'employee',
-        entities: [],
+        schema: configService.get<string>('database.schema') || 'public',
+        entities: [AuditChangeLog],
       })
     }),
     JwtModule.register({
@@ -32,7 +35,9 @@ import { JwtModule } from '@nestjs/jwt';
       signOptions: { expiresIn: '1h' }, // Token expiration time
       global: true, // Makes JwtService available globally
     }),
-    SummaryModule
+    MonitoringModule,
+    SummaryModule,
+    KafkaModule
   ],
   controllers: [AppController],
   providers: [AppService],

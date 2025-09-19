@@ -7,6 +7,7 @@ import database from './config/database';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from './users/v1/users.module';
 import { Users } from './users/v1/users.entity';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { Users } from './users/v1/users.entity';
       global: true, // Makes JwtService available globally
     }),
     ProfileModule,
+    KafkaModule,
     UserModule
   ],
   controllers: [],

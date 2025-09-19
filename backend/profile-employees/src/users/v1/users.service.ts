@@ -9,6 +9,7 @@ import { LoginUserDTO } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdateUserAdminDto } from './dto/update-user-admin-dto';
+import { KafkaProducerService } from 'src/kafka';
 
 @Injectable()
 export class UserService {
@@ -17,7 +18,8 @@ export class UserService {
         private readonly userRepository: Repository<Users>,
         @InjectRepository(EmployeeProfile)
         private readonly profileRepository: Repository<EmployeeProfile>,
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
+        private readonly producer: KafkaProducerService
     ) {}
 
     async registerUser(register: CreateUserDto) {
@@ -139,6 +141,12 @@ export class UserService {
                 ...updateUserDB,
                 ...updateProfileDB
             };
+
+            await this.producer.publish('monitoring-change', {
+                employee_id,
+                ...updatedFieldUser,
+                ...updatedFieldProfile
+            });
 
             return {
                 data: response,

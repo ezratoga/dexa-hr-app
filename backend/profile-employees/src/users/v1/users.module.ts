@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 import { EmployeeProfile } from 'src/profiles/v1/profiles.entity';
 import { AuthMiddleware } from 'src/utils/auth/middleware';
+import { KafkaModule } from 'src/kafka/kafka.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users, EmployeeProfile])],
+  imports: [TypeOrmModule.forFeature([Users, EmployeeProfile]), KafkaModule],
   controllers: [UsersController],
   providers: [UserService],
   exports: [UserService]

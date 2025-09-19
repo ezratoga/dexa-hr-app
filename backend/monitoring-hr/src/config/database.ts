@@ -7,7 +7,7 @@ export default registerAs('database', () => ({
   port: parseInt(process.env.DB_PORT || '5432', 10),
   username: process.env.DB_USERNAME || 'user1',
   password: process.env.DB_PASSWORD || 'xxxxxxxxxxxxxxxx',
-  database: process.env.DB_NAME || 'profile',
+  database: process.env.DB_NAME || 'public',
   autoLoadEntities: true,
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
